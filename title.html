@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 各种浏览器兼容
+		var hidden, state, visibilityChange;
+		if (typeof document.hidden !== "undefined") {
+			hidden = "hidden";
+			visibilityChange = "visibilitychange";
+			state = "visibilityState";
+		} else if (typeof document.mozHidden !== "undefined") {
+			hidden = "mozHidden";
+			visibilityChange = "mozvisibilitychange";
+			state = "mozVisibilityState";
+		} else if (typeof document.msHidden !== "undefined") {
+			hidden = "msHidden";
+			visibilityChange = "msvisibilitychange";
+			state = "msVisibilityState";
+		} else if (typeof document.webkitHidden !== "undefined") {
+			hidden = "webkitHidden";
+			visibilityChange = "webkitvisibilitychange";
+			state = "webkitVisibilityState";
+		}
+
+		// 添加监听器，在title里显示状态变化
+		document.addEventListener(visibilityChange, function() {
+			//document.title = document[state];
+			if(document.hidden){
+			//用户没有在看本页面，
+				document.title = '我已经藏了哦';
+			}else{
+				document.title ='被你找到了';
+			}
+		}, false);
+
+
+		/*
+
+	 var hiddenProperty = 'hidden' in document ? 'hidden' :
+        'webkitHidden' in document ? 'webkitHidden' :
+        'mozHidden' in document ? 'mozHidden' :
+        null;
+    var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
+    var onVisibilityChange = function(){
+        if (!document[hiddenProperty]) {
+            document.title='被发现啦(*´∇｀*)';
+        }else{
+            document.title='藏好啦(つд⊂)  ';
+        }
+    }
+    document.addEventListener(visibilityChangeEvent, onVisibilityChange);
+		*/
+	</script>
+</body>
+</html>
